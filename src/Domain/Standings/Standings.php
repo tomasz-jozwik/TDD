@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\Standings;
+namespace BallGame\Domain\Standings;
 
-use \BallGame\Match\Match;
-use \BallGame\TeamPosition\TeamPosition;
-use \BallGame\RuleBook\RuleBookInterface;
+use \BallGame\Domain\Match\Match;
+use \BallGame\Domain\TeamPosition\TeamPosition;
+use \BallGame\Domain\RuleBook\RuleBookInterface;
 
 class Standings
 {

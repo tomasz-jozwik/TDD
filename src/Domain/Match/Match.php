@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\Match;
+namespace BallGame\Domain\Match;
 
-use BallGame\Team\Team;
-use BallGame\Team\TeamsSameNamesException;
+use BallGame\Domain\Team\Team;
+use BallGame\Domain\Team\TeamsSameNamesException;
 
 class Match
 {

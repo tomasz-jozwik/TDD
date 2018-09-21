@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\RuleBook;
+namespace BallGame\Domain\RuleBook;
 
-use \BallGame\TeamPosition\TeamPosition;
+use \BallGame\Domain\TeamPosition\TeamPosition;
 
 
 class SimpleRuleBook implements RuleBookInterface

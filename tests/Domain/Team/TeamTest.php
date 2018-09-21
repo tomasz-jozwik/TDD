@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\Tests\Team;
+namespace BallGame\Tests\Domain\Team;
 
-use BallGame\Match\Match;
-use BallGame\Team\Team;
-use BallGame\Team\TeamsSameNamesException;
-use BallGame\Team\BadTeamNameException;
+use BallGame\Domain\Match\Match;
+use BallGame\Domain\Team\Team;
+use BallGame\Domain\Team\TeamsSameNamesException;
+use BallGame\Domain\Team\BadTeamNameException;
 use PHPUnit\Framework\TestCase;
 
 class TeamTest extends TestCase

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\TeamPosition;
+namespace BallGame\Domain\TeamPosition;
 
-use \BallGame\Team\Team;
+use \BallGame\Domain\Team\Team;
 
 class TeamPosition
 {

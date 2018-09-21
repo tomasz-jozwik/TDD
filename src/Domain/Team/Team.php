@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace BallGame\Team;
+namespace BallGame\Domain\Team;
 
-use BallGame\Team\BadTeamNameException;
+use BallGame\Domain\Team\BadTeamNameException;
 
 class Team
 {
