@@ -25,7 +25,7 @@ class TeamPosition
     /**
      * @var int
      */
-    private $wins;
+    private $wins = 0;
 
     public function __construct(Team $team) {
         $this->team = $team;
@@ -33,6 +33,10 @@ class TeamPosition
 
     public function recordWin() {
         $this->wins++;
+    }
+
+    public function getWins() : int {
+        return $this->wins;
     }
 
     public function getPoints() : int {

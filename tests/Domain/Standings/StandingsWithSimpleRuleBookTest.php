@@ -30,7 +30,10 @@ class StandingsWithSimpleRuleBookTest extends TestCase
 
     public function setUp() {
         $this->ruleBook = new SimpleRuleBook();
-        $this->matchRepository = new MatchRepository();
+        //$this->matchRepository = new MatchRepository();
+        $this->matchRepository = $this->getMockBuilder(MatchRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->standings = new Standings($this->ruleBook, $this->matchRepository);
     }
 
@@ -42,8 +45,9 @@ class StandingsWithSimpleRuleBookTest extends TestCase
         $tigers = Team::create('Tigers');
         $elephants = Team::create('Elephants');
         $match = Match::create($tigers, $elephants, 2, 1);
-
         $this->standings->record($match);
+
+        $this->matchRepository->method('findAll')->willReturn([$match]);
 
         // When
         $actualStandings = $this->standings->getSortedStandings();
@@ -69,6 +73,8 @@ class StandingsWithSimpleRuleBookTest extends TestCase
 
         $this->standings->record($match);
 
+        $this->matchRepository->method('findAll')->willReturn([$match]);
+
         // When
         $actualStandings = $this->standings->getSortedStandings();
 
@@ -82,4 +88,16 @@ class StandingsWithSimpleRuleBookTest extends TestCase
         );
     }
 
+    public function testRecordSavesMatchInRepository()
+    {
+        $match = $this->getMockBuilder(Match::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->matchRepository
+            ->expects($this->once())
+            ->method('save');
+
+        $this->standings->record($match);
+    }
 }

@@ -54,5 +54,19 @@ class TeamPositionTest extends TestCase
         $this->assertSame(0, $this->teamPosition->getPointsAgainst());
     }
 
+    public function testGetWinsWhenThereWereNoWinsRecorded()
+    {
+        $this->assertSame(0, $this->teamPosition->getWins());
+    }
+
+    public function testGetWinsWhenThereWereThreeWinsRecorded()
+    {
+        $this->teamPosition->recordWin();
+        $this->teamPosition->recordWin();
+        $this->teamPosition->recordWin();
+
+        $this->assertSame(3, $this->teamPosition->getWins());
+    }
+
 
 }
