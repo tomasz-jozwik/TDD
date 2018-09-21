@@ -6,13 +6,14 @@ namespace BallGame\Domain\Standings;
 use \BallGame\Domain\Match\Match;
 use \BallGame\Domain\TeamPosition\TeamPosition;
 use \BallGame\Domain\RuleBook\RuleBookInterface;
+use \BallGame\Infrastructure\Repository\MatchRepository;
 
 class Standings
 {
     /**
-     * @var Match[]
+     * @var MatchRepository
      */
-    protected $matches;
+    protected $matchRepository;
 
     /**
      * @var TeamPosition[]
@@ -24,18 +25,19 @@ class Standings
      */
     protected $ruleBook;
 
-    public function __construct(RuleBookInterface $ruleBook) {
+    public function __construct(RuleBookInterface $ruleBook, MatchRepository $matchRepository) {
         $this->ruleBook = $ruleBook;
+        $this->matchRepository = $matchRepository;
     }
 
     public function record(Match $match)
     {
-        $this->matches[] = $match;
+        $this->matchRepository->save($match);
     }
 
     public function getSortedStandings()
     {
-        foreach ($this->matches as $match) {
+        foreach ($this->matchRepository->findAll() as $match) {
             if (!isset($this->teamPositions[spl_object_hash($match->getTeamOne())])) {
                 $this->teamPositions[spl_object_hash($match->getTeamOne())] = new TeamPosition($match->getTeamOne());
             }

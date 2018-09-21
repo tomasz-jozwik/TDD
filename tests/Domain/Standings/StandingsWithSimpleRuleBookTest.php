@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace BallGame\Tests\Domain;
 
-use BallGame\Domain\Standings\Standings;
-use BallGame\Domain\Match\Match;
-use BallGame\Domain\Team\Team;
-use BallGame\Domain\TeamPosition\TeamPosition;
-use BallGame\Domain\RuleBook\SimpleRuleBook;
-use PHPUnit\Framework\TestCase;
+use \BallGame\Domain\Standings\Standings;
+use \BallGame\Domain\Match\Match;
+use \BallGame\Domain\Team\Team;
+use \BallGame\Domain\TeamPosition\TeamPosition;
+use \BallGame\Domain\RuleBook\SimpleRuleBook;
+use \BallGame\Infrastructure\Repository\MatchRepository;
+use \PHPUnit\Framework\TestCase;
 
 class StandingsWithSimpleRuleBookTest extends TestCase
 {
@@ -22,11 +23,20 @@ class StandingsWithSimpleRuleBookTest extends TestCase
      */
     protected $standings;
 
+    /**
+     * @var MatchRepository
+     */
+    protected $matchRepository;
+
     public function setUp() {
         $this->ruleBook = new SimpleRuleBook();
-        $this->standings = new Standings($this->ruleBook);
+        $this->matchRepository = new MatchRepository();
+        $this->standings = new Standings($this->ruleBook, $this->matchRepository);
     }
 
+    /**
+     * @group integration
+     */
     public function testGetStandingsReturnsSortedLeagueStandings() {
         // Given
         $tigers = Team::create('Tigers');
@@ -48,6 +58,9 @@ class StandingsWithSimpleRuleBookTest extends TestCase
         );
     }
 
+    /**
+     * @group integration
+     */
     public function testGetStandingsReturnsSortedLeagueStandingsWhenSecondTeamEndsUpInFirstPlace() {
         // Given
         $tigers = Team::create('Tigers');
