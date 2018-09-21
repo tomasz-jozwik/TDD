@@ -31,16 +31,23 @@ class SimpleRuleBookTest extends TestCase
 
     public function testDecideReturnsGreaterThanZeroWhenFirstPositionIsGreaterThanSecond() {
         $this->teamAPosition->method('getPoints')->willReturn(10);
-        $this->teamAPosition->method('getPoints')->willReturn(1);
+        $this->teamBPosition->method('getPoints')->willReturn(1);
 
-        $this->assertSame(-1, $this->simpleRuleBook->decide($teamAPosition, $teamBPosition));
+        $this->assertSame(-1, $this->simpleRuleBook->decide($this->teamAPosition, $this->teamBPosition));
     }
 
     public function testDecideReturnsGreaterThanZeroWhenSecondPositionIsGreaterThanFirst() {
         $this->teamAPosition->method('getPoints')->willReturn(1);
-        $this->teamAPosition->method('getPoints')->willReturn(10);
+        $this->teamBPosition->method('getPoints')->willReturn(10);
 
-        $this->assertSame(1, $this->simpleRuleBook->decide($teamAPosition, $teamBPosition));
+        $this->assertSame(1, $this->simpleRuleBook->decide($this->teamAPosition, $this->teamBPosition));
+    }
+
+    public function testDecideReturnsZeroWhenPositionsAreTheSame() {
+        $this->teamAPosition->method('getPoints')->willReturn(1);
+        $this->teamBPosition->method('getPoints')->willReturn(1);
+
+        $this->assertSame(0, $this->simpleRuleBook->decide($this->teamAPosition, $this->teamBPosition));
     }
 
     public function testDecideReturnsZeroWhenBothPositionsAreTheSame() {
