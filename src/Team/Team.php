@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace BallGame\Team;
 
+use BallGame\Team\BadTeamNameException;
+
 class Team
 {
     /**
@@ -15,6 +17,10 @@ class Team
     }
 
     public function create(string $name) {
+        if (empty($name)) {
+            throw new BadTeamNameException('Team needs a name');
+        }
+
         return new self($name);
     }
 

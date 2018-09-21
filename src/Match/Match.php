@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace BallGame\Match;
 
 use BallGame\Team\Team;
+use BallGame\Team\TeamsSameNamesException;
 
 class Match
 {
@@ -51,6 +52,10 @@ class Match
     }
 
     public function create(Team $teamOne, Team $teamTwo, int $teamOneScore, int $teamTwoScore) {
+        if ($teamOne->getName() === $teamTwo->getName()) {
+            throw new TeamsSameNamesException('Teams cannot have the same name');
+        }
+
         return new self($teamOne, $teamTwo, $teamOneScore, $teamTwoScore);
     }
 }
