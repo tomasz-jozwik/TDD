@@ -43,14 +43,10 @@ class SimpleRuleBookTest extends TestCase
         $this->assertSame(1, $this->simpleRuleBook->decide($this->teamAPosition, $this->teamBPosition));
     }
 
-    public function testDecideReturnsZeroWhenPositionsAreTheSame() {
+    public function testDecideReturnsZeroWhenBothPositionsAreTheSame() {
         $this->teamAPosition->method('getPoints')->willReturn(1);
         $this->teamBPosition->method('getPoints')->willReturn(1);
 
         $this->assertSame(0, $this->simpleRuleBook->decide($this->teamAPosition, $this->teamBPosition));
-    }
-
-    public function testDecideReturnsZeroWhenBothPositionsAreTheSame() {
-
     }
 }
