@@ -6,17 +6,25 @@ namespace BallGame\Tests;
 use BallGame\Standings\Standings;
 use BallGame\Match\Match;
 use BallGame\Team\Team;
+use BallGame\TeamPosition\TeamPosition;
+use BallGame\RuleBook\SimpleRuleBook;
 use PHPUnit\Framework\TestCase;
 
-class StandingsTest extends TestCase
+class StandingsWithSimpleRuleBookTest extends TestCase
 {
+    /**
+     * @var RuleBookInterface
+     */
+    protected $ruleBook;
+
     /**
      * @var Standings
      */
     protected $standings;
 
     public function setUp() {
-        $this->standings = new Standings();
+        $this->ruleBook = new SimpleRuleBook();
+        $this->standings = new Standings($this->ruleBook);
     }
 
     public function testGetStandingsReturnsSortedLeagueStandings() {
@@ -44,7 +52,7 @@ class StandingsTest extends TestCase
         // Given
         $tigers = Team::create('Tigers');
         $elephants = Team::create('Elephants');
-        $match = Match::create($tigers, $elephants, 2, 1);
+        $match = Match::create($tigers, $elephants, 0, 1);
 
         $this->standings->record($match);
 

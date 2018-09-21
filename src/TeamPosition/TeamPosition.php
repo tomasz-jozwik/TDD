@@ -51,7 +51,7 @@ class TeamPosition
         return $this->pointsScored;
     }
 
-    public function recordPointsAgains(int $points) {
+    public function recordPointsAgainst(int $points) {
         $this->pointsAgainst += $points;
     }
 
